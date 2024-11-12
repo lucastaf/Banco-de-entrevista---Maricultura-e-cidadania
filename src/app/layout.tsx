@@ -30,7 +30,9 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <AppBar />
-        {children}
+        <div className="p-8 xl:p-28">
+          {children}
+        </div>
       </body>
     </html>
   );
