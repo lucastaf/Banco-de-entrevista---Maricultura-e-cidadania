@@ -30,7 +30,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <AppBar />
-        <div className="p-8 xl:p-28">
+        <div className="p-8 xl:p-28 xl:py-16">
           {children}
         </div>
       </body>
