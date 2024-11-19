@@ -20,7 +20,7 @@ export default function NewCarrousel() {
   const [currentSelected, setCurrentSelected] = useState(0);
   const news = newsMock;
   return (
-    <Card className="overflow-hidden min-h-72">
+    <Card className="overflow-hidden">
       <Carousel
         setApi={(api) => {
           if (!api) return;
@@ -34,8 +34,13 @@ export default function NewCarrousel() {
       >
         <CarouselContent className="m-0">
           {news.map((item, index) => (
-            <CarouselItem key={index} className="p-0" >
-              <div className={`relative h-80 flex justify-center ${index == 0 ? "bg-red-400" : "bg-yellow-400"}`}>
+            <CarouselItem
+              key={index}
+              className="p-0 justify-center flex bg-slate-600 h-full"
+            >
+              <div
+                className={`relative h-52 sm:h-80 max-lg:w-full flex justify-center lg:aspect-[3]`}
+              >
                 <Image
                   fill
                   src={item.image}
@@ -43,10 +48,10 @@ export default function NewCarrousel() {
                   className="object-cover"
                 />
               </div>
-              <div className="absolute w-full h-36 bg-slate-800 bg-opacity-50 bottom-0 p-8 flex justify-center">
+              <div className="absolute w-full max-h-36 bg-slate-800 bg-opacity-50 bottom-0 max-sm:p-4 max-sm:pb-6 p-8 flex justify-center">
                 <div>
-                  <h1 className="text-white">{item.date.toDateString()}</h1>
-                  <h1 className="text-white">{item.title}</h1>
+                  <h1 className="text-white max-sm:text-sm text-right drop-shadow">{item.date.toDateString()}</h1>
+                  <h1 className="text-white max-sm:text-sm drop-shadow">{item.title}</h1>
                 </div>
               </div>
             </CarouselItem>
@@ -54,11 +59,11 @@ export default function NewCarrousel() {
         </CarouselContent>
         <CarouselPrevious />
         <CarouselNext />
-        <div className="flex gap-3 justify-center absolute bottom-4 left-1/2 -translate-x-1/2">
+        <div className="flex gap-3 justify-center absolute bottom-4 max-sm:bottom-2 left-1/2 -translate-x-1/2">
           {news.map((_, index) => (
             <div
               key={index}
-              className={`h-4 w-4 rounded-full ${
+              className={`h-4 w-4 max-sm:w-3 max-sm:h-3 rounded-full ${
                 index == currentSelected ? "bg-slate-50" : "bg-slate-400"
               }`}
             />
