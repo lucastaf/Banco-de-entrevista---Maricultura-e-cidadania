@@ -29,14 +29,13 @@ export default function NewCarrousel() {
           });
         }}
         opts={{
-          align: "start",
           loop: true,
         }}
       >
-        <CarouselContent className="relative">
+        <CarouselContent className="m-0">
           {news.map((item, index) => (
-            <CarouselItem key={index} className="min-h-72">
-              <div className="relative h-full">
+            <CarouselItem key={index} className="p-0" >
+              <div className={`relative h-80 flex justify-center ${index == 0 ? "bg-red-400" : "bg-yellow-400"}`}>
                 <Image
                   fill
                   src={item.image}
@@ -55,7 +54,7 @@ export default function NewCarrousel() {
         </CarouselContent>
         <CarouselPrevious />
         <CarouselNext />
-        <div className="flex gap-3 justify-center absolute bottom-4 left-1/2 translate-x-1/2">
+        <div className="flex gap-3 justify-center absolute bottom-4 left-1/2 -translate-x-1/2">
           {news.map((_, index) => (
             <div
               key={index}
