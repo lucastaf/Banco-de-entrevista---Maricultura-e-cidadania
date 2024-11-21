@@ -22,6 +22,10 @@ export default function novaNoticia() {
               <Textarea placeholder="Nova especie de moluscos descoberta" />
             </div>
             <div>
+              <Label>Data </Label>
+              <Input type="date" placeholder="Nova especie de moluscos descoberta" />
+            </div>
+            <div>
               <Label>Capa da noticia</Label>
               <div>
                 <Input type="file" id="capaInput" className="hidden" />
