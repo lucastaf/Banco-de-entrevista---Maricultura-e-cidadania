@@ -22,9 +22,9 @@ import {
 import { cn } from "@/lib/utils";
 
 const navigationItems = [
-  { title: "Inicio", href: "#features" },
-  { title: "Contato", href: "#pricing" },
-  { title: "Login", href: "#about" },
+  { title: "Inicio", href: "/" },
+  { title: "Contato", href: "/redes" },
+  { title: "Login", href: "/gerenciar" },
 ];
 
 export default function AppBar() {
