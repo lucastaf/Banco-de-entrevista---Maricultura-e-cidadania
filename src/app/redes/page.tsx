@@ -6,13 +6,14 @@ export default function Redes() {
     <div>
       <div className="flex flex-col items-center gap-4">
         <h1 className="text-lg w-[500px] max-w-[90%]">Nossas redes:</h1>
-        <Rede icon={<Instagram size={30} />} text="@gibamanzoni" />
-        <Rede icon={<Instagram size={30} />} text="@gibamanzoni" />
-        <Rede icon={<Instagram size={30} />} text="@gibamanzoni" />
+        <Rede href="" icon={<Instagram size={30} />} text="@gibamanzoni" />
+        <Rede href="" icon={<Instagram size={30} />} text="@gibamanzoni" />
+        <Rede href="" icon={<Instagram size={30} />} text="@gibamanzoni" />
       </div>
       <div className="mt-16 flex flex-col items-center gap-4">
         <h1 className=" text-lg w-[500px] max-w-[90%]">Emails:</h1>
         <Rede
+          href=""
           textSize="text-lg"
           icon={<Mail size={25} />}
           text="manzoni@univali.br"
