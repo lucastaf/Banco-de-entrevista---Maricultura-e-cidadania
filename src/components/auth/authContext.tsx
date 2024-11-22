@@ -1,4 +1,10 @@
-import { ContextType, createContext, ReactElement, useState } from "react";
+import {
+  ContextType,
+  createContext,
+  ReactElement,
+  useContext,
+  useState,
+} from "react";
 
 type useAuthType = {
   login: (email: string, password: string) => Promise<boolean>;
@@ -13,8 +19,9 @@ const authContext = createContext<useAuthType>({
     return Promise.reject();
   },
 });
+export const useAuth = () => useContext(authContext);
 
-const AuthContextProvider = (props: { children: ReactElement }) => {
+export const AuthContextProvider = (props: { children: ReactElement }) => {
   const [accessToken, setAccessToken] = useState(
     localStorage.getItem("accessToken")
   );
