@@ -1,12 +1,14 @@
 import { Button } from "@/components/ui/button";
 import {
   Table,
+  TableBody,
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
 import { Trash } from "lucide-react";
+import Link from "next/link";
 
 type mockData = {
   data: Date;
@@ -29,6 +31,11 @@ export default function NewsManager() {
   ];
   return (
     <>
+      <div className="flex justify-center">
+        <Link href={"/gerenciar/novaNoticia"}>
+          <Button>Nova Noticia</Button>
+        </Link>
+      </div>
       <Table>
         <TableHeader>
           <TableRow>
@@ -37,17 +44,19 @@ export default function NewsManager() {
             <TableHead className="w-[50px]">Ação</TableHead>
           </TableRow>
         </TableHeader>
-        {dados.map((item) => (
-          <TableRow>
-            <TableCell>{item.data.toDateString()}</TableCell>
-            <TableCell>{item.title}</TableCell>
-            <TableCell>
-              <Button variant="ghost" size="icon">
-                <Trash />
-              </Button>
-            </TableCell>
-          </TableRow>
-        ))}
+        <TableBody>
+          {dados.map((item) => (
+            <TableRow>
+              <TableCell>{item.data.toDateString()}</TableCell>
+              <TableCell>{item.title}</TableCell>
+              <TableCell>
+                <Button variant="ghost" size="icon">
+                  <Trash />
+                </Button>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
       </Table>
     </>
   );

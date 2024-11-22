@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -18,12 +19,19 @@ export default function novaNoticia() {
               <Textarea placeholder="Nova especie de moluscos descoberta" />
             </div>
             <div>
-              <Label>Descricao (opcional)</Label>
-              <Textarea placeholder="Nova especie de moluscos descoberta" />
+              <Label>Data da noticia</Label>
+              <Input
+                type="date"
+                placeholder="Nova especie de moluscos descoberta"
+              />
             </div>
             <div>
-              <Label>Data </Label>
-              <Input type="date" placeholder="Nova especie de moluscos descoberta" />
+              <Label>Link da noticia</Label>
+              <Input placeholder="https://g1.com.br" />
+            </div>
+            <div>
+              <Label>Descricao (opcional)</Label>
+              <Textarea placeholder="Nova especie de moluscos descoberta" />
             </div>
             <div>
               <Label>Capa da noticia</Label>
@@ -40,6 +48,9 @@ export default function novaNoticia() {
                 </Label>
               </div>
             </div>
+          </div>
+          <div className="flex justify-end mt-4">
+            <Button>Publicar</Button>
           </div>
         </CardContent>
       </Card>
