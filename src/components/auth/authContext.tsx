@@ -14,7 +14,7 @@ type useAuthType = {
 
 const authContext = createContext<useAuthType>({
   accessToken: null,
-  isLogged: false,
+  isLogged: true,
   login(email, password) {
     return Promise.reject();
   },
@@ -25,7 +25,7 @@ export const AuthContextProvider = (props: { children: ReactElement }) => {
   const [accessToken, setAccessToken] = useState(
     localStorage.getItem("accessToken")
   );
-  const isLogged = false;
+  const isLogged = true;
   const login: useAuthType["login"] = async (email, password) => {
     return false;
   };
