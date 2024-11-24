@@ -1,0 +1,17 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model entrevistas {
+  id        Int       @id @default(autoincrement())
+  titulo    String?   @db.VarChar(200)
+  data      DateTime? @db.Date
+  link      String?   @db.VarChar(200)
+  descricao String?   @db.VarChar(500)
+  imagem    String?   @db.VarChar(100)
+}
