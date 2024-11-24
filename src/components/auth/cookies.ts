@@ -1,9 +1,14 @@
+"use client"
+
 export interface Cookie {
   name: string
   value: string
 }
 
 export function getCookie(name: string): Cookie | null {
+  if (typeof document == "undefined") {
+    return null
+  }
   const cArray = decodeURIComponent(document.cookie)
     .split('; ')
     .map(item => {

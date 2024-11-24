@@ -1,3 +1,4 @@
+"use client"
 import axios from "axios";
 import {
   ContextType,
@@ -6,12 +7,13 @@ import {
   useContext,
   useState,
 } from "react";
-import { getCookie, setCookie } from "./cookies";
+import { deleteCookie, getCookie, setCookie } from "./cookies";
 
 type useAuthType = {
   login: (user: string, password: string) => Promise<boolean>;
   accessToken: string | null;
   isLogged: boolean;
+  logout: () => void;
 };
 
 const authContext = createContext<useAuthType>({
@@ -20,6 +22,7 @@ const authContext = createContext<useAuthType>({
   login(user, password) {
     return Promise.reject();
   },
+  logout() {},
 });
 export const useAuth = () => useContext(authContext);
 
@@ -42,10 +45,16 @@ export const AuthContextProvider = (props: { children: ReactElement }) => {
     }
   };
 
+  const logout = () => {
+    deleteCookie("accessToken");
+    setAccessToken(null);
+  };
+
   return (
     <authContext.Provider
       value={{
         login,
+        logout,
         accessToken,
         isLogged,
       }}

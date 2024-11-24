@@ -1,3 +1,5 @@
+'use client'
+import { useAuth } from "@/components/auth/authContext";
 import { Button } from "@/components/ui/button";
 import {
   Table,
@@ -15,6 +17,7 @@ type mockData = {
   title: string;
 };
 export default function NewsManager() {
+  const auth = useAuth()
   const dados: mockData[] = [
     {
       data: new Date(),
@@ -31,7 +34,10 @@ export default function NewsManager() {
   ];
   return (
     <>
-      <div className="flex justify-center">
+      <div className="flex flex-col items-center gap-4">
+        <div>
+          <Button onClick={auth.logout} variant={"destructive"}>Logout</Button>
+        </div>
         <Link href={"/gerenciar/novaNoticia"}>
           <Button>Nova Noticia</Button>
         </Link>
@@ -46,7 +52,7 @@ export default function NewsManager() {
         </TableHeader>
         <TableBody>
           {dados.map((item, index) => (
-            <TableRow key={index} >
+            <TableRow key={index}>
               <TableCell>{item.data.toDateString()}</TableCell>
               <TableCell>{item.title}</TableCell>
               <TableCell>
