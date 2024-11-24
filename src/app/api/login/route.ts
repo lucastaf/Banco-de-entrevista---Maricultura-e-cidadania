@@ -4,8 +4,7 @@ import { NextResponse } from 'next/server';
 import { Repository } from 'redis-om';
 
 export async function POST(request: Request) {
-    //@ts-ignore
-    const bodyData: user = await request.json()
+    const bodyData = await request.json()
     const apiURL: string = process.env.GOOGLE_SHEETS_API_URL ?? ""
     try {
         const authorized = await (await axios.post(apiURL, bodyData)).data

@@ -7,7 +7,7 @@ import { redisExecute } from "@/lib/redis";
 
 export async function GET() {
     const data = await prisma.entrevistas.findMany()
-    return NextResponse.json(123)
+    return NextResponse.json(data)
 }
 
 export async function POST(request: NextRequest) {
