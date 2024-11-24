@@ -15,6 +15,7 @@ import axios from "axios";
 import { Trash } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 export default function NewsManager() {
   const auth = useAuth();
@@ -30,9 +31,24 @@ export default function NewsManager() {
       });
   }, []);
 
-  function deleteItem (id : number){
-    //deleta
+  function deleteItem(id: number) {
+    const resAxios = axios.delete(`/api/news/${id}`, {
+      headers: {
+        Authorization: auth.accessToken,
+      },
+    });
+    resAxios.then((res) => {
+      setData((prev) => {
+        return [...prev.filter((item) => item.id != id)];
+      });
+    });
+    toast.promise(resAxios, {
+      error: "erro ao excluir a noticia",
+      loading: "excluindo noticia",
+      success: "noticia excluida com sucesso",
+    });
   }
+  
   return (
     <>
       <div className="flex flex-col items-center gap-4">
@@ -59,7 +75,11 @@ export default function NewsManager() {
               <TableCell>{formatDate(item.data)}</TableCell>
               <TableCell>{item.titulo}</TableCell>
               <TableCell>
-                <Button variant="ghost" size="icon">
+                <Button
+                  onClick={() => deleteItem(item.id)}
+                  variant="ghost"
+                  size="icon"
+                >
                   <Trash />
                 </Button>
               </TableCell>

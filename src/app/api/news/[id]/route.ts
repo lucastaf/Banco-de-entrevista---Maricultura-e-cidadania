@@ -1,7 +1,8 @@
 import { prisma } from "@/lib/prisma";
 import { redisExecute } from "@/lib/redis";
 import { NextRequest, NextResponse } from "next/server";
-
+import { join } from "path";
+import { unlink } from "fs/promises"
 export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
     const accessToken = request.headers.get("Authorization")
     const savedToken = await redisExecute(["get", "accessToken"])
@@ -15,6 +16,19 @@ export async function DELETE(request: NextRequest, { params }: { params: { id: s
     try {
         if (!id) {
             throw "id é obrigatório"
+        }
+        const registro = await prisma.entrevistas.findFirst({
+            where: {
+                id: parseInt(id)
+            }
+        })
+        if (!registro) {
+            throw "registro inexistente"
+        }
+        if (registro.imagem) {
+            const path = join(process.cwd(), "public", registro.imagem)
+            await unlink(path)
+
         }
         await prisma.entrevistas.delete({
             where: {

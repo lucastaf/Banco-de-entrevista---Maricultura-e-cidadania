@@ -27,7 +27,6 @@ export async function POST(request: NextRequest) {
         const bytes = await file.arrayBuffer()
         const buffer = Buffer.from(bytes)
         const path = join(process.cwd(), "public", fileName)
-        console.log(data.get("data"))
         await prisma.entrevistas.create({
             data: {
                 data: new Date(data.get("data") as unknown as string),
