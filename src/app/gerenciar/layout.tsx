@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import type { Metadata } from "next";
 import AppBar from "@/components/ui/appbar";
@@ -10,13 +10,20 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactElement;
 }>) {
-  const auth = useAuth();
-
   return (
     <>
       <AuthContextProvider>
-        {auth.isLogged ? children : <LoginCard />}
+        <AuthLayout>{children}</AuthLayout>
       </AuthContextProvider>
     </>
   );
+}
+
+function AuthLayout({
+  children,
+}: Readonly<{
+  children: React.ReactElement;
+}>) {
+  const auth = useAuth();
+  return auth.isLogged ? children : <LoginCard />;
 }

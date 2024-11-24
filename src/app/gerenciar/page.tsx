@@ -45,8 +45,8 @@ export default function NewsManager() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {dados.map((item) => (
-            <TableRow>
+          {dados.map((item, index) => (
+            <TableRow key={index} >
               <TableCell>{item.data.toDateString()}</TableCell>
               <TableCell>{item.title}</TableCell>
               <TableCell>
