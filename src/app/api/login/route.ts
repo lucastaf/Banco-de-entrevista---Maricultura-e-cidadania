@@ -1,7 +1,5 @@
 import { client, redisExecute } from '@/lib/redis';
 import axios from 'axios';
-import { NextResponse } from 'next/server';
-import { Repository } from 'redis-om';
 
 export async function POST(request: Request) {
     const bodyData = await request.json()

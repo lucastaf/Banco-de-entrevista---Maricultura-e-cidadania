@@ -13,12 +13,12 @@ import {
   PaginationContent,
   PaginationItem,
 } from "../ui/pagination";
-import { newsMock } from "../types/newsTypes";
+import { newsType } from "../types/newsTypes";
 import Image from "next/image";
+import { formatDate } from "../functions/formatDate";
 
-export default function NewCarrousel() {
+export default function NewCarrousel({ data: news }: { data: newsType[] }) {
   const [currentSelected, setCurrentSelected] = useState(0);
-  const news = newsMock;
   return (
     <Card className="overflow-hidden">
       <Carousel
@@ -33,29 +33,36 @@ export default function NewCarrousel() {
         }}
       >
         <CarouselContent className="m-0">
-          {news.map((item, index) => (
-            <CarouselItem
-              key={index}
-              className="p-0 justify-center flex bg-slate-600 h-full"
-            >
-              <div
-                className={`relative h-52 sm:h-80 max-lg:w-full flex justify-center lg:aspect-[3]`}
+          {news.map((item, index) => {
+            item.titulo = item.titulo[0].toUpperCase() + item.titulo.substring(1)
+            return (
+              <CarouselItem
+                key={index}
+                className="p-0 justify-center flex bg-slate-600 h-full"
               >
-                <Image
-                  fill
-                  src={item.image}
-                  alt={"Capa da noticia"}
-                  className="object-cover"
-                />
-              </div>
-              <div className="absolute w-full max-h-36 bg-slate-800 bg-opacity-50 bottom-0 max-sm:p-4 max-sm:pb-6 p-8 flex justify-center">
-                <div>
-                  <h1 className="text-white max-sm:text-sm text-right drop-shadow">{item.date.toDateString()}</h1>
-                  <h1 className="text-white max-sm:text-sm drop-shadow">{item.title}</h1>
+                <div
+                  className={`relative h-52 sm:h-80 max-lg:w-full flex justify-center lg:aspect-[3]`}
+                >
+                  <Image
+                    fill
+                    src={"/" + item.imagem}
+                    alt={"Capa da noticia"}
+                    className="object-cover"
+                  />
                 </div>
-              </div>
-            </CarouselItem>
-          ))}
+                <div className="absolute w-full max-h-36 bg-slate-800 bg-opacity-50 bottom-0 max-sm:p-4 max-sm:pb-6 p-8 flex justify-center">
+                  <div>
+                    <h1 className="text-white max-sm:text-sm text-right drop-shadow">
+                      {formatDate(item.data)}
+                    </h1>
+                    <h1 className="text-white max-sm:text-sm drop-shadow">
+                      {item.titulo}
+                    </h1>
+                  </div>
+                </div>
+              </CarouselItem>
+            );
+          })}
         </CarouselContent>
         <CarouselPrevious />
         <CarouselNext />

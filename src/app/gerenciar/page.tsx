@@ -1,5 +1,7 @@
-'use client'
+"use client";
 import { useAuth } from "@/components/auth/authContext";
+import { formatDate } from "@/components/functions/formatDate";
+import { newsType } from "@/components/types/newsTypes";
 import { Button } from "@/components/ui/button";
 import {
   Table,
@@ -9,34 +11,35 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import axios from "axios";
 import { Trash } from "lucide-react";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
-type mockData = {
-  data: Date;
-  title: string;
-};
 export default function NewsManager() {
-  const auth = useAuth()
-  const dados: mockData[] = [
-    {
-      data: new Date(),
-      title: "Titulo da materia 1",
-    },
-    {
-      data: new Date(Date.now() + 10000),
-      title: "Titulo da materia 2",
-    },
-    {
-      data: new Date(Date.now() + 20000),
-      title: "Titulo da materia 2",
-    },
-  ];
+  const auth = useAuth();
+  const [data, setData] = useState<newsType[]>([]);
+  useEffect(() => {
+    axios
+      .get("/api/news")
+      .then((res) => {
+        setData(res.data);
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+  }, []);
+
+  function deleteItem (id : number){
+    //deleta
+  }
   return (
     <>
       <div className="flex flex-col items-center gap-4">
         <div>
-          <Button onClick={auth.logout} variant={"destructive"}>Logout</Button>
+          <Button onClick={auth.logout} variant={"destructive"}>
+            Logout
+          </Button>
         </div>
         <Link href={"/gerenciar/novaNoticia"}>
           <Button>Nova Noticia</Button>
@@ -51,10 +54,10 @@ export default function NewsManager() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {dados.map((item, index) => (
+          {data.map((item, index) => (
             <TableRow key={index}>
-              <TableCell>{item.data.toDateString()}</TableCell>
-              <TableCell>{item.title}</TableCell>
+              <TableCell>{formatDate(item.data)}</TableCell>
+              <TableCell>{item.titulo}</TableCell>
               <TableCell>
                 <Button variant="ghost" size="icon">
                   <Trash />
