@@ -3,21 +3,16 @@ import { NextRequest, NextResponse } from "next/server";
 import { nanoid } from 'nanoid'
 import { join } from "path";
 import { writeFile } from "fs/promises";
-
-const NodeCache = require("node-cache");
-export const myCache = new NodeCache({ stdTTL: 0 });
-
+import { redisExecute } from "@/lib/redis";
 
 export async function GET() {
-    const cache = myCache.get("acessToken")
-    console.log(cache)
-    //const data = await prisma.entrevistas.findMany()
+    const data = await prisma.entrevistas.findMany()
     return NextResponse.json(123)
 }
 
 export async function POST(request: NextRequest) {
     const acessToken = request.headers.get("Authorization")
-    const savedToken = myCache.get("acessToken")
+    const savedToken = await redisExecute(["get", "accessToken"])
     if (acessToken != savedToken) {
         console.log(savedToken)
         return new NextResponse(JSON.stringify("Unauthorized"), {
@@ -33,10 +28,10 @@ export async function POST(request: NextRequest) {
         const bytes = await file.arrayBuffer()
         const buffer = Buffer.from(bytes)
         const path = join(process.cwd(), "public", fileName)
-        
+        console.log(data.get("data"))
         await prisma.entrevistas.create({
             data: {
-                data: data.get("data") as unknown as string,
+                data: new Date(data.get("data") as unknown as string),
                 descricao: data.get("descricao") as unknown as string,
                 link: data.get("link") as unknown as string,
                 titulo: data.get("titulo") as unknown as string,

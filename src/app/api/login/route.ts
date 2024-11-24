@@ -1,21 +1,7 @@
+import { client, redisExecute } from '@/lib/redis';
 import axios from 'axios';
-import { myCache } from '../news/route';
 import { NextResponse } from 'next/server';
-
-
-export async function GET(request: Request) {
-    const newCache = request.headers.get("cache")
-    const savedCache = myCache.get("acessToken")
-    console.log(savedCache)
-    if (newCache) {
-
-        myCache.set("acessToken", newCache, 3600)
-    } else {
-        //myCache.set("acessToken", savedCache, 3600)
-
-    }
-    return new NextResponse(JSON.stringify(savedCache))
-}
+import { Repository } from 'redis-om';
 
 export async function POST(request: Request) {
     //@ts-ignore
@@ -25,7 +11,7 @@ export async function POST(request: Request) {
         const authorized = await (await axios.post(apiURL, bodyData)).data
         if (authorized) {
             const accessToken = newToken()
-            myCache.set("acessToken", accessToken, 3600)
+            await redisExecute(["set", "accessToken", accessToken, "ex", "3600"])
             return new Response(JSON.stringify(accessToken), {
                 status: 200
             })
