@@ -7,11 +7,13 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import axios from "axios";
 import { CloudUpload } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { FormEvent, FormEventHandler, useState } from "react";
 import toast from "react-hot-toast";
 
 export default function novaNoticia() {
   const auth = useAuth();
+  const router = useRouter()
   const onSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
 
@@ -22,6 +24,7 @@ export default function novaNoticia() {
       },
     });
 
+    resAxios.then(res => router.push("/gerenciar"))
     resAxios.catch((e) => console.error(e));
 
     toast.promise(resAxios, {

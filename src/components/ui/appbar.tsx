@@ -24,13 +24,10 @@ import { cn } from "@/lib/utils";
 const navigationItems = [
   { title: "Inicio", href: "/" },
   { title: "Contato", href: "/redes" },
-  { title: "Login", href: "/gerenciar" },
+  { title: "Gerenciar", href: "/gerenciar" },
 ];
 
 export default function AppBar() {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
-  //Fazer um context para login depois
-  const [isLogged, setIsLogged] = React.useState(false);
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 flex justify-center">
@@ -71,7 +68,6 @@ export default function AppBar() {
                     key={item.title}
                     href={item.href}
                     className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
-                    onClick={() => setIsMobileMenuOpen(false)}
                   >
                     {item.title}
                   </Link>

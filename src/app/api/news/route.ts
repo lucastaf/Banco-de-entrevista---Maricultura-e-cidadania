@@ -6,7 +6,11 @@ import { writeFile } from "fs/promises";
 import { redisExecute } from "@/lib/redis";
 
 export async function GET() {
-    const data = await prisma.entrevistas.findMany()
+    const data = await prisma.entrevistas.findMany({
+        orderBy: {
+            data: "desc"
+        }
+    })
     return NextResponse.json(data)
 }
 
@@ -36,7 +40,7 @@ export async function POST(request: NextRequest) {
                 imagem: fileName
             }
         })
-        
+
         await writeFile(path, buffer)
         return NextResponse.json({ success: true })
     } catch (e) {
