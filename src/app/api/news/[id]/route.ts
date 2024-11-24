@@ -25,16 +25,15 @@ export async function DELETE(request: NextRequest, { params }: { params: { id: s
         if (!registro) {
             throw "registro inexistente"
         }
-        if (registro.imagem) {
-            const path = join(process.cwd(), "public", registro.imagem)
-            await unlink(path)
-
-        }
         await prisma.entrevistas.delete({
             where: {
                 id: parseInt(id)
             }
         })
+        if (registro.imagem) {
+            const path = join(process.cwd(), "public", registro.imagem)
+            await unlink(path)
+        }
         return new NextResponse(JSON.stringify("ok"))
     } catch (e) {
         return new NextResponse(JSON.stringify(e), {

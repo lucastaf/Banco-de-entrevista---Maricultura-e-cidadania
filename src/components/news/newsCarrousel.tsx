@@ -21,7 +21,7 @@ import Link from "next/link";
 export default function NewCarrousel({ data: news }: { data: newsType[] }) {
   const [currentSelected, setCurrentSelected] = useState(0);
   return (
-    <Card className="overflow-hidden transition active:scale-[99.3%] ease-linear">
+    <Card className="overflow-hidden transition active:scale-[99%] ease-linear">
       <Carousel
         setApi={(api) => {
           if (!api) return;
