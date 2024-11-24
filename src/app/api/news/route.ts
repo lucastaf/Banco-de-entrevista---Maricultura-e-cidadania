@@ -14,7 +14,6 @@ export async function POST(request: NextRequest) {
     const acessToken = request.headers.get("Authorization")
     const savedToken = await redisExecute(["get", "accessToken"])
     if (acessToken != savedToken) {
-        console.log(savedToken)
         return new NextResponse(JSON.stringify("Unauthorized"), {
             status: 401
         })
