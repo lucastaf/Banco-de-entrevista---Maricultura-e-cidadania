@@ -1,5 +1,13 @@
+import { getAcessToken, setAcessToken } from '@/components/auth/authApi';
 import { client, redisExecute } from '@/lib/redis';
 import axios from 'axios';
+
+export async function GET() {
+    await getAcessToken()
+    return new Response(JSON.stringify("accessToken"), {
+        status: 200
+    })
+}
 
 export async function POST(request: Request) {
     const bodyData = await request.json()
@@ -8,7 +16,7 @@ export async function POST(request: Request) {
         const authorized = await (await axios.post(apiURL, bodyData)).data
         if (authorized) {
             const accessToken = newToken()
-            await redisExecute(["set", "accessToken", accessToken, "ex", "3600"])
+            await setAcessToken(accessToken)
             return new Response(JSON.stringify(accessToken), {
                 status: 200
             })
