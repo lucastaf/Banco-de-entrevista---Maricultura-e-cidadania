@@ -18,9 +18,9 @@ export default function Rede({
     <Card className="w-[500px] max-w-[90%] transition hover:scale-110 ease-linear">
       <Link href={href} target="_blank">
         <CardContent className="py-4 px-2">
-          <div className={"flex items-center gap-4 justify-center " + textSize}>
-            {icon}
-            {text}
+          <div className="grid grid-cols-5 gap-3">
+            <div className="col-span-2 max-[500px]:col-span-1 flex justify-end">{icon}</div>
+            <div className="">{text}</div>
           </div>
         </CardContent>
       </Link>
