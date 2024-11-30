@@ -1,13 +1,5 @@
 import { getAcessToken, setAcessToken } from '@/components/auth/authApi';
-import { client, redisExecute } from '@/lib/redis';
 import axios from 'axios';
-
-export async function GET() {
-    await getAcessToken()
-    return new Response(JSON.stringify("accessToken"), {
-        status: 200
-    })
-}
 
 export async function POST(request: Request) {
     const bodyData = await request.json()

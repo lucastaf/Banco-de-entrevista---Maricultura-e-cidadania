@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { nanoid } from 'nanoid'
 import { join } from "path";
 import { writeFile } from "fs/promises";
-import { redisExecute } from "@/lib/redis";
+import { getAcessToken } from "@/components/auth/authApi";
 
 export async function GET() {
     const data = await prisma.entrevistas.findMany({
@@ -16,7 +16,7 @@ export async function GET() {
 
 export async function POST(request: NextRequest) {
     const acessToken = request.headers.get("Authorization")
-    const savedToken = await redisExecute(["get", "accessToken"])
+    const savedToken = await getAcessToken()
     if (acessToken != savedToken) {
         return new NextResponse(JSON.stringify("Unauthorized"), {
             status: 401

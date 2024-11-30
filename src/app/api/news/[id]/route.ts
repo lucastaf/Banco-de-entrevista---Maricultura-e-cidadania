@@ -3,9 +3,10 @@ import { redisExecute } from "@/lib/redis";
 import { NextRequest, NextResponse } from "next/server";
 import { join } from "path";
 import { unlink } from "fs/promises"
+import { getAcessToken } from "@/components/auth/authApi";
 export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
     const accessToken = request.headers.get("Authorization")
-    const savedToken = await redisExecute(["get", "accessToken"])
+    const savedToken = await getAcessToken()
 
     if (accessToken != savedToken) {
         return new NextResponse(JSON.stringify("Unauthorized"), {
