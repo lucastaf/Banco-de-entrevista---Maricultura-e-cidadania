@@ -1,5 +1,4 @@
 import { prisma } from "@/lib/prisma";
-import { redisExecute } from "@/lib/redis";
 import { NextRequest, NextResponse } from "next/server";
 import { join } from "path";
 import { unlink } from "fs/promises"

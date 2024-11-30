@@ -1,4 +1,4 @@
-import { getAcessToken, setAcessToken } from '@/components/auth/authApi';
+import { setAcessToken } from '@/components/auth/authApi';
 import axios from 'axios';
 
 export async function POST(request: Request) {
