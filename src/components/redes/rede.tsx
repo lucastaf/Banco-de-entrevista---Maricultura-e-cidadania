@@ -1,12 +1,10 @@
-import { Instagram } from "lucide-react";
 import { Card, CardContent } from "../ui/card";
-import { HTMLAttributes, ReactElement } from "react";
+import { ReactElement } from "react";
 import Link from "next/link";
 
 export default function Rede({
   icon,
   text,
-  textSize = "text-xl",
   href,
 }: {
   icon: ReactElement;

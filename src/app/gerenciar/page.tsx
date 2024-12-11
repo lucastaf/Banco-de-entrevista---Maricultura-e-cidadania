@@ -37,7 +37,7 @@ export default function NewsManager() {
         Authorization: auth.accessToken,
       },
     });
-    resAxios.then((res) => {
+    resAxios.then(() => {
       setData((prev) => {
         return [...prev.filter((item) => item.id != id)];
       });

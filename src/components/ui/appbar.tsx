@@ -81,7 +81,8 @@ export default function AppBar() {
   );
 }
 
-function UserButton() {
+
+export function UserButton() {
   return (
     <nav className="flex items-center">
       <DropdownMenu>

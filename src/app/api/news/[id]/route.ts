@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { join } from "path";
 import { unlink } from "fs/promises"
 import { getAcessToken } from "@/components/auth/authApi";
-export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
+export async function DELETE(request: NextRequest, { params } : any) {
     const accessToken = request.headers.get("Authorization")
     const savedToken = await getAcessToken()
 

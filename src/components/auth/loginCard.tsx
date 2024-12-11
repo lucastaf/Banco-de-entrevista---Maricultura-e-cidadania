@@ -2,7 +2,6 @@ import { Card, CardContent, CardHeader } from "../ui/card";
 import { Label } from "@radix-ui/react-dropdown-menu";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
-import { Avatar } from "../ui/avatar";
 import { Loader2, User } from "lucide-react";
 import { useAuth } from "./authContext";
 import { FormEvent, useState } from "react";
@@ -13,9 +12,9 @@ export default function LoginCard() {
   const auth = useAuth();
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    //@ts-ignore
+    //@ts-expect-error nullable
     const user: string = e.target[0].value;
-    //@ts-ignore
+    //@ts-expect-error nullable
     const password: string = e.target[1].value;
     setLoadingButton(true);
     const loginPromise = new Promise((resolve, reject) => {

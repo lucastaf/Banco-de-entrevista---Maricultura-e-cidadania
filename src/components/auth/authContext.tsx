@@ -1,7 +1,6 @@
 "use client"
 import axios from "axios";
 import {
-  ContextType,
   createContext,
   ReactElement,
   useContext,
@@ -19,7 +18,7 @@ type useAuthType = {
 const authContext = createContext<useAuthType>({
   accessToken: null,
   isLogged: false,
-  login(user, password) {
+  login() {
     return Promise.reject();
   },
   logout() {},
@@ -40,7 +39,7 @@ export const AuthContextProvider = (props: { children: ReactElement }) => {
       setAccessToken(resAxios.data);
       setCookie("accessToken", resAxios.data, 3600);
       return true;
-    } catch (e) {
+    } catch {
       return false;
     }
   };

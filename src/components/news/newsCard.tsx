@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Card, CardContent, CardHeader } from "../ui/card";
+import { Card, CardContent } from "../ui/card";
 import { newsType } from "../types/newsTypes";
 import { formatDate } from "../functions/formatDate";
 import Link from "next/link";

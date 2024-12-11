@@ -1,13 +1,19 @@
+"use client"
 import NewsCard from "@/components/news/newsCard";
 import NewCarrousel from "@/components/news/newsCarrousel";
 import { newsType } from "@/components/types/newsTypes";
 import axios from "axios";
-import Image from "next/image";
 import { useEffect, useState } from "react";
 
-export default async function Home() {
-  const fetchedData = await fetch("http://localhost:3000/api/news");
-  const data = (await fetchedData.json()) as newsType[];
+export default function Home() {
+  const [data, setData] = useState<newsType[]>([])
+  useEffect(()=>{
+    axios.get("/api/news").then(res=>{
+      setData(res.data)
+    }).catch(e=>{
+      console.error(e)
+    })
+  },[])
   return (
     <div className="gap-8 grid">
       {data && <NewCarrousel data={data.slice(0, 5)} />}

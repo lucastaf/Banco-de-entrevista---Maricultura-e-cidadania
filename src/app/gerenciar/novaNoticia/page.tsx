@@ -8,10 +8,10 @@ import { Textarea } from "@/components/ui/textarea";
 import axios from "axios";
 import { CloudUpload } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { FormEvent, FormEventHandler, useState } from "react";
+import { FormEventHandler, useState } from "react";
 import toast from "react-hot-toast";
 
-export default function novaNoticia() {
+export default function NovaNoticia() {
   const auth = useAuth();
   const router = useRouter()
   const onSubmit: FormEventHandler<HTMLFormElement> = (e) => {
@@ -24,11 +24,11 @@ export default function novaNoticia() {
       },
     });
 
-    resAxios.then(res => router.push("/gerenciar"))
+    resAxios.then(() => router.push("/gerenciar"))
     resAxios.catch((e) => console.error(e));
 
     toast.promise(resAxios, {
-      error: (e) => "Erro ao incluir a noticia",
+      error: () => "Erro ao incluir a noticia",
       loading: "Incluindo noticia",
       success: "Noticia incluida com sucesso",
     });
@@ -76,7 +76,7 @@ export default function novaNoticia() {
                 <div>
                   <Input
                     onChange={(file) =>
-                      //@ts-ignores
+                      //@ts-expect-error nullabe
                       setFileName(file.target.files?.[0].name)
                     }
                     type="file"

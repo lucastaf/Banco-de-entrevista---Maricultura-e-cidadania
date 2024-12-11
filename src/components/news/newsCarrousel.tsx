@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { Card, CardContent } from "../ui/card";
+import { Card } from "../ui/card";
 import {
   Carousel,
   CarouselContent,
@@ -8,11 +8,6 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "../ui/carousel";
-import {
-  Pagination,
-  PaginationContent,
-  PaginationItem,
-} from "../ui/pagination";
 import { newsType } from "../types/newsTypes";
 import Image from "next/image";
 import { formatDate } from "../functions/formatDate";

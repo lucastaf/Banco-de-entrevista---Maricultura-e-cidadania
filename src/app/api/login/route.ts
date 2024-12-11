@@ -16,7 +16,7 @@ export async function POST(request: Request) {
             throw "Unauthorized"
         }
 
-    } catch (e) {
+    } catch {
         return new Response(JSON.stringify("Unauthorized"), {
             status: 401
         })
